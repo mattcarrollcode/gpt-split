@@ -2,7 +2,8 @@ import unittest
 
 import tiktoken
 
-from main import split_on_n_tokens 
+from main import split_on_n_tokens
+
 
 class TestSplitOnNTokens(unittest.TestCase):
 
@@ -19,7 +20,6 @@ class TestSplitOnNTokens(unittest.TestCase):
         result = split_on_n_tokens(long_text, 10, enc)
         self.assertEqual(len(result), 67)
 
+
 if __name__ == '__main__':
     unittest.main()
-
-

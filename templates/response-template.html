@@ -1,26 +1,25 @@
 <html>
 <script>
   function copyText(id) {
-    // Get the text field
-    var copyText = document.getElementById(id);
+       // Get the text field
+       var copyText = document.getElementById(id)
 
-    // Select the text field
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); // For mobile devices
+      // Select the text field
+      copyText.select()
+      copyText.setSelectionRange(0, 99999); // For mobile devices
 
-     // Copy the text inside the text field
-    navigator.clipboard.writeText(copyText.value);
-  }
+        // Copy the text inside the text field
+      navigator.clipboard.writeText(copyText.value); }
 </script>
 <ol>
-  {% for chunk in chunks %}
-      <li>
-        <textarea id="{{ loop.index }}" rows="15" cols="50" readonly>{{ chunk }}</textarea>
-        <button onclick="copyText({{ loop.index }})">
-          Copy text
-        </button>
-      </li>
-  {% endfor %}
+    {% for chunk in chunks %}
+       <li>
+            <textarea id = "{{ loop.index }}" rows = "15" cols = "50" readonly> {{chunk}} </textarea>
+            <button onclick = "copyText({{ loop.index }})">
+              Copy text
+            </button>
+        </li>
+    {% endfor %}
 </ol>
-<button onclick="history.back()">Go Back</button>
+<button onclick = "history.back()">Go Back</button>
 </html>
