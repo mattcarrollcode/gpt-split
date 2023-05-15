@@ -1,10 +1,11 @@
 <html>
- <form>
+ <form method="post">
   <input type="hidden" id="model" name="model" value="gpt-4">
   <label for="fname">Number of tokens to split on:</label><br>
   <input type="number" id="tokenlimit" name="tokenlimit"><br>
   <label for="lname">Text to split on token size:</label><br>
-  <textarea id="text" name="text">
+  <textarea id="text" name="text"></textarea>
+  <input type="submit" value="Submit">
 </form> 
 
 </html>

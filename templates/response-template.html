@@ -1,0 +1,24 @@
+<html>
+<script>
+  function copyText(id) {
+    // Get the text field
+    var copyText = document.getElementById(id);
+
+    // Select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+
+     // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText.value);
+  }
+</script>
+{% for chunk in chunks %}
+    <li>
+      <textarea id="{{ loop.index }}"readonly>{{ chunk }}</textarea>
+      <button onclick="copyText({{ loop.index }})">
+        Copy text
+      </button>
+    </li>
+{% endfor %}
+
+</html>

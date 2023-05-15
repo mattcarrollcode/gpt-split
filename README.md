@@ -7,14 +7,19 @@ This web app splits up a large block of text on a set number of tokens for bette
 1. Install requirements: `pip install -r requirements.txt`
 
 ## Run
-1. 
+
+* App in dev mode: 
+* App in prod mode: `python main.py`
+* Tests: `python -m unittest`
 
 ## Next steps
 * Wire up Sentry
-* Testing
+* input validation
 * Support more encoders
 * Support other tokenziers besides tiktoken
 * Nicer UI
   * copy paste button for each split section
 * prompt suggestions
+
+
 

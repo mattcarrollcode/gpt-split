@@ -1,23 +1,44 @@
-from flask import Flask
+from flask import Flask, render_template
+import flask
 import tiktoken
+import os
 
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def hello():
-    if flask.request.method == 'GET':
+    request = flask.request
+    if request.method == 'GET':
         return render_template("index.html")
     
     model = request.form['model']
     tokenlimit = request.form['tokenlimit']
     text = request.form['text']
-    # enc = tiktoken.get_encoding("cl100k_base")
-    # assert enc.decode(enc.encode("hello world")) == "hello world"
+    enc = tiktoken.encoding_for_model(model)
+    chunks = split_on_n_tokens(text, int(tokenlimit), enc)
+    return render_template("response-template.html", chunks=chunks)
 
-    # To get the tokeniser corresponding to a specific model in the OpenAI API:
-    enc = tiktoken.encoding_for_model("gpt-4")
-    enc.encode(text)
-    return enc
+def split_on_n_tokens(text: str, n: int, enc: tiktoken.Encoding) -> list[str]:
+    list_of_str = []
+    enc_text = enc.encode(text)
+    index = 0
+
+    print(n)
+    print(len(enc_text))
+    print(enc_text)
+    print(n > len(enc_text))
+    if n > len(enc_text):
+        return [ text ]
+
+    while index < len(enc_text):
+        prev_index = index
+        index += n
+
+        enc_text_chunk = enc_text[prev_index:index]
+        text_chunk = enc.decode(enc_text_chunk).strip()
+        list_of_str.append(text_chunk)
+    return list_of_str
 
 
-
+if __name__ == '__main__':
+    app.run(debug=True, port=os.getenv("PORT", default=5000))
