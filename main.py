@@ -1,8 +1,16 @@
-from flask import Flask, render_template
 import flask
+from flask import Flask, render_template
 import tiktoken
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 import os, subprocess, multiprocessing
+
+sentry_sdk.init(
+    dsn="https://3f028c12bf974d988f2a41d3e8929ec8@o4505190542540800.ingest.sentry.io/4505190543851520",
+    integrations=[FlaskIntegration()],
+    traces_sample_rate=1.0
+)
 
 app = Flask(__name__)
 
@@ -22,7 +30,6 @@ def hello():
     enc = tiktoken.encoding_for_model(model)
     chunks = split_on_n_tokens(text, int(tokenlimit), enc)
     return render_template("response-template.html", chunks=chunks)
-
 
 def split_on_n_tokens(text: str, n: int, enc: tiktoken.Encoding) -> list[str]:
     list_of_str = []
