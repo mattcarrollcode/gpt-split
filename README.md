@@ -8,8 +8,8 @@ This web app splits up a large block of text on a set number of tokens for bette
 
 ## Run
 
-* App in dev mode: 
-* App in prod mode: `python main.py`
+* App in dev mode: `python main.py`
+* App in prod mode: ` gunicorn main:app`
 * Tests: `python -m unittest`
 
 ## Next steps

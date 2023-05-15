@@ -12,13 +12,15 @@
     navigator.clipboard.writeText(copyText.value);
   }
 </script>
-{% for chunk in chunks %}
-    <li>
-      <textarea id="{{ loop.index }}"readonly>{{ chunk }}</textarea>
-      <button onclick="copyText({{ loop.index }})">
-        Copy text
-      </button>
-    </li>
-{% endfor %}
-
+<ol>
+  {% for chunk in chunks %}
+      <li>
+        <textarea id="{{ loop.index }}" rows="15" cols="50" readonly>{{ chunk }}</textarea>
+        <button onclick="copyText({{ loop.index }})">
+          Copy text
+        </button>
+      </li>
+  {% endfor %}
+</ol>
+<button onclick="history.back()">Go Back</button>
 </html>
