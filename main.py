@@ -1,7 +1,8 @@
 from flask import Flask, render_template
 import flask
 import tiktoken
-import os
+
+import os, subprocess, multiprocessing
 
 app = Flask(__name__)
 
@@ -11,8 +12,9 @@ def hello():
     request = flask.request
     if request.method == 'GET':
         models = list(tiktoken.model.MODEL_TO_ENCODING.keys())
-        print(models)
-        return render_template("index.html", models=models)
+        with open('a-study-in-scarlet.txt') as file:
+            example_text = file.read()
+        return render_template("index.html", models=models, example_text=example_text)
 
     model = request.form['model']
     tokenlimit = request.form['tokenlimit']
@@ -40,4 +42,12 @@ def split_on_n_tokens(text: str, n: int, enc: tiktoken.Encoding) -> list[str]:
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=os.getenv("PORT", default=5000))
+    if 'RAILWAY_ENVIRONMENT' in os.environ and os.environ['RAILWAY_ENVIRONMENT'] == 'production':
+        # Thread count should be CPU times 2 according to the documentation
+        # https://flask.palletsprojects.com/en/2.3.x/deploying/gunicorn/#running
+        thread_count = multiprocessing.cpu_count() * 2
+        # Standard command to run a Flask app with gunicorn
+        subprocess.run(["gunicorn", "-w", str(thread_count), "-b", "0.0.0.0", "main:app"])
+    else:
+        # Use local debug server if not deploying to Railway
+        app.run(debug=True, port=os.getenv("PORT", default=5000))

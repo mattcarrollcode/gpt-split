@@ -8,9 +8,7 @@
             <option
                 value = "{{ model }}"
                 {% if model == 'gpt-4' %}selected{% endif %}
-            >
-            {{model}}
-            </option>
+            >{{model}}</option>
             {% endfor %}
         </select>
         <br>
@@ -19,7 +17,7 @@
         <input type = "number" id = "tokenlimit" name = "tokenlimit" value = "8192"><br>
 
         <label for = "text"> Text to split on token size: </label> <br>
-        <textarea id = "text" name = "text" rows = "20" cols = "100" required></textarea><br>
+        <textarea id = "text" name = "text" rows = "20" cols = "100" required>{{ example_text }}</textarea><br>
 
         <input type = "submit" value = "Submit">
 </form>
