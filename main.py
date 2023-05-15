@@ -42,12 +42,4 @@ def split_on_n_tokens(text: str, n: int, enc: tiktoken.Encoding) -> list[str]:
 
 
 if __name__ == '__main__':
-    if 'RAILWAY_ENVIRONMENT' in os.environ and os.environ['RAILWAY_ENVIRONMENT'] == 'production':
-        # Thread count should be CPU times 2 according to the documentation
-        # https://flask.palletsprojects.com/en/2.3.x/deploying/gunicorn/#running
-        thread_count = multiprocessing.cpu_count() * 2
-        # Standard command to run a Flask app with gunicorn
-        subprocess.run(["gunicorn", "-w", str(thread_count), "-b", "0.0.0.0", "main:app"])
-    else:
-        # Use local debug server if not deploying to Railway
-        app.run(debug=True, port=os.getenv("PORT", default=5000))
+    app.run(debug=True, port=os.getenv("PORT", default=5000))
