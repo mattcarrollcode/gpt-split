@@ -1,6 +1,6 @@
 # GPT Split
 
-This web app splits up large blocks of text on a set number of tokens as defined by OpenAI for better ingestion into tools like ChatGPT. You can see a live demo here: https://gpt-split-production.up.railway.app/
+This web app splits up large blocks of text on a set number of tokens as defined by OpenAI for better ingestion into tools like ChatGPT. You can see a live demo here: <a href="https://gpt-split-production.up.railway.app/" target="_blank">https://gpt-split-production.up.railway.app/</a>.
 
 ![GPT split demo screenshots](https://raw.githubusercontent.com/mattcarrollcode/gpt-split/main/screenshot-demo.png)
 
