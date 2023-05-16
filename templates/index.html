@@ -14,20 +14,34 @@
     {% endfor %}
   </select>
   <br>
-  <label for = "tokenlimit"><b>Number of tokens to split on:</b></label>
-  <input type = "number" id = "tokenlimit" name = "tokenlimit" value = "8192">
+  <label for="tokenlimit"><b>Number of tokens to split on:</b></label>
+  <input type="number" id="tokenlimit" name="tokenlimit" value="8192">
   <br>
 
-  <label for = "text"><b>Text to split:</b></label> <br>
-  <textarea id = "text" name = "text" rows = "20" cols = "50" required>{{ example_text }}</textarea><br>
+  <label for="text"><b>Text to split:</b></label> <br>
+  <textarea id="text" name="text" rows="20" cols="50" required>{{ example_text }}</textarea><br>
 
-  <input type = "submit" value = "Submit">
+  <input type="submit" value="Submit">
 </form>
 
 <h3>OpenAI token limits</h3>
 <ul>
-   <li> GPT-4: 8,192 tokens </li>
-   <li> GPT-3.5 Turbo: 4,096 tokens </li>
+   <li> GPT-4:
+      <a href="#" onclick="setTokenLimit(8192)">
+        8,192 tokens
+      </a>
+    </li>
+   <li> GPT-3.5 Turbo:
+      <a href="#" onclick="setTokenLimit(4096)">
+        4,096 tokens
+      </a>
+    </li>
 </ul>
-<p>Source: <a href = "https://platform.openai.com/docs/models">OpenAI documentation</a></p>
+<p>Source: <a href="https://platform.openai.com/docs/models">OpenAI documentation</a></p>
+<script>
+function setTokenLimit(limit){
+  var tokenlimt = document.getElementById("tokenlimit")
+  tokenlimt.value = limit;
+}
+</script>
 {% endblock %}
