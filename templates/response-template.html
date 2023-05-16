@@ -1,25 +1,34 @@
 <html>
-<script>
-  function copyText(id) {
-       // Get the text field
-       var copyText = document.getElementById(id)
-
-      // Select the text field
-      copyText.select()
-      copyText.setSelectionRange(0, 99999); // For mobile devices
-
-        // Copy the text inside the text field
-      navigator.clipboard.writeText(copyText.value); }
-</script>
-<ol>
-    {% for chunk in chunks %}
-       <li>
-            <textarea id = "{{ loop.index }}" rows = "15" cols = "50" readonly> {{chunk}} </textarea>
-            <button onclick = "copyText({{ loop.index }})">
-              Copy text
-            </button>
+  <head>
+    <title>GPT Split</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script src="https://js.sentry-cdn.com/3f028c12bf974d988f2a41d3e8929ec8.min.js" crossorigin="anonymous"></script>
+    <script>
+      Sentry.init({
+        dsn: "https://3f028c12bf974d988f2a41d3e8929ec8@o4505190542540800.ingest.sentry.io/4505190543851520",
+        integrations: [new Sentry.BrowserTracing()],
+        tracesSampleRate: 1.0,
+      });
+    </script>
+  </head>
+  <body>
+    <ol>
+      {% for chunk in chunks %}
+        <li>
+          <textarea id="{{ loop.index }}" rows="15" cols="50" readonly> {{chunk}} </textarea>
+          <button onclick = "copyInput({{ loop.index }})">Copy text</button>
         </li>
-    {% endfor %}
-</ol>
-<button onclick = "history.back()">Go Back</button>
+      {% endfor %}
+    </ol>
+    <button onclick = "history.back()">Go Back</button>
+    <script>
+      function copyInput(id) {
+        var copyText = document.getElementById(id)
+        copyText.select()
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+        navigator.clipboard.writeText(copyText.value);
+        Sentry.captureMessage("copyInput with ID " + id);
+      }
+    </script>
+  </body>
 </html>

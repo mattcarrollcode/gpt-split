@@ -1,10 +1,11 @@
 import flask
-from flask import Flask, render_template
+from flask import Flask, render_template,  url_for
 import tiktoken
 import sentry_sdk
+from sentry_sdk import set_tag, set_context
 from sentry_sdk.integrations.flask import FlaskIntegration
 
-import os, subprocess, multiprocessing
+import os
 
 sentry_sdk.init(
     dsn="https://3f028c12bf974d988f2a41d3e8929ec8@o4505190542540800.ingest.sentry.io/4505190543851520",
@@ -12,8 +13,10 @@ sentry_sdk.init(
     traces_sample_rate=1.0
 )
 
-app = Flask(__name__)
+if 'RAILWAY_ENVIRONMENT' in os.environ and os.environ['RAILWAY_ENVIRONMENT'] == 'production':
+    set_tag("environment", "prod")
 
+app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def hello():
@@ -29,6 +32,13 @@ def hello():
     text = request.form['text']
     enc = tiktoken.encoding_for_model(model)
     chunks = split_on_n_tokens(text, int(tokenlimit), enc)
+
+    set_context("split_request", {
+        "model": model,
+        "token_limit": tokenlimit,
+        "text_length": len(text),
+        "num_chunks": len(chunks),
+    })
     return render_template("response-template.html", chunks=chunks)
 
 def split_on_n_tokens(text: str, n: int, enc: tiktoken.Encoding) -> list[str]:
