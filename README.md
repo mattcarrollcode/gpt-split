@@ -4,7 +4,7 @@ This web app splits up large blocks of text on a set number of tokens as defined
 
 ![GPT split demo screenshots](https://raw.githubusercontent.com/mattcarrollcode/gpt-split/main/screenshot-demo.png)
 
-Note: This has only been tested to work on macOS and Railway
+Note: This has only been tested to work on macOS and [Railway](https://railway.app/)
 
 ## Setup
 
