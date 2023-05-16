@@ -31,8 +31,6 @@ Note: This has only been tested to work on macOS and [Railway](https://railway.a
 ## Next steps
 * Fix Sentry message capture in `templates/results.html`
 * Input validation
-* Style the UI
-* Better mobile support
 * Debug mobile copy-paste support
 * Support other tokenziers besides tiktoken
 * Prompt suggestions to help LLMs ingest multiple messages together

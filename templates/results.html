@@ -5,8 +5,9 @@
 <ol>
   {% for chunk in chunks %}
     <li>
-      <button onclick="copyInput({{ loop.index }})">Copy text</button><br>
+      <b>{{ loop.index }} of {{ chunks|length }}</b>
       <textarea id="{{ loop.index }}" rows="15" cols="50" readonly> {{chunk}} </textarea>
+      <button onclick="copyInput({{ loop.index }})">Copy text</button><br>
     </li>
   {% endfor %}
 </ol>
