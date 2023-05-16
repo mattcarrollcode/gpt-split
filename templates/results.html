@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>GPT Split</h1>
+<h3>Results:</h3>
+<ol>
+  {% for chunk in chunks %}
+    <li>
+      <button onclick = "copyInput({{ loop.index }})">Copy text</button><br>
+      <textarea id="{{ loop.index }}" rows="15" cols="50" readonly> {{chunk}} </textarea>
+    </li>
+  {% endfor %}
+</ol>
+<button onclick = "history.back()">Go Back</button>
+<script>
+  function copyInput(id) {
+    var copyText = document.getElementById(id)
+    copyText.select()
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+    navigator.clipboard.writeText(copyText.value);
+    Sentry.captureMessage("copyInput with ID " + id);
+  }
+</script>
+{% endblock %}

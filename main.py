@@ -39,7 +39,7 @@ def hello():
         "text_length": len(text),
         "num_chunks": len(chunks),
     })
-    return render_template("response-template.html", chunks=chunks)
+    return render_template("results.html", chunks=chunks)
 
 def split_on_n_tokens(text: str, n: int, enc: tiktoken.Encoding) -> list[str]:
     list_of_str = []

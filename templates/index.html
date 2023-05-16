@@ -1,46 +1,33 @@
-<html>
-  <head>
-    <title>GPT Split</title>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <script src="https://js.sentry-cdn.com/3f028c12bf974d988f2a41d3e8929ec8.min.js" crossorigin="anonymous"></script>
-    <script>
-      Sentry.init({
-        dsn: "https://3f028c12bf974d988f2a41d3e8929ec8@o4505190542540800.ingest.sentry.io/4505190543851520",
-        integrations: [new Sentry.BrowserTracing()],
-        tracesSampleRate: 1.0,
-      });
-    </script>
-  </head>
-  <body>
-    <h1>GPT Split</h1>
-    <p>Split your input based on the number of tokens to input large amounts of text into ChatGPT and GPT APIs.</p>
-    <form method="post">
-      <label for="model"> Model: </label>
-      <select id="model" name="model">
-        {% for model in models %}
-          <option
-            value="{{ model }}"
-            {% if model == "gpt-4" %}selected{% endif %}>
-            {{model}}
-          </option>
-        {% endfor %}
-      </select>
-      <br>
-      <label for = "tokenlimit"> Number of tokens to split on: </label>
-      <input type = "number" id = "tokenlimit" name = "tokenlimit" value = "8192">
-      <br>
+{% extends "layout.html" %}
+{% block content %}
+<h1>GPT Split</h1>
+<p>Split your input based on the number of tokens to input large amounts of text into ChatGPT and GPT APIs.</p>
+<form method="post">
+  <label for="model"><b>Model:</b></label>
+  <select id="model" name="model">
+    {% for model in models %}
+      <option
+        value="{{ model }}"
+        {% if model == "gpt-4" %}selected{% endif %}>
+        {{model}}
+      </option>
+    {% endfor %}
+  </select>
+  <br>
+  <label for = "tokenlimit"><b>Number of tokens to split on:</b></label>
+  <input type = "number" id = "tokenlimit" name = "tokenlimit" value = "8192">
+  <br>
 
-      <label for = "text"> Text to split on token size: </label> <br>
-      <textarea id = "text" name = "text" rows = "20" cols = "100" required>{{ example_text }}</textarea><br>
+  <label for = "text"><b>Text to split:</b></label> <br>
+  <textarea id = "text" name = "text" rows = "20" cols = "50" required>{{ example_text }}</textarea><br>
 
-      <input type = "submit" value = "Submit">
-    </form>
+  <input type = "submit" value = "Submit">
+</form>
 
-    <h3>OpenAI token limits</h3>
-    <ul>
-       <li> GPT-4: 8,192 tokens </li>
-       <li> GPT-3.5 Turbo: 4,096 tokens </li>
-    </ul>
-    <p>Source: <a href = "https://platform.openai.com/docs/models">OpenAI documentation</a></p>
-  </body>
-</html>
+<h3>OpenAI token limits</h3>
+<ul>
+   <li> GPT-4: 8,192 tokens </li>
+   <li> GPT-3.5 Turbo: 4,096 tokens </li>
+</ul>
+<p>Source: <a href = "https://platform.openai.com/docs/models">OpenAI documentation</a></p>
+{% endblock %}

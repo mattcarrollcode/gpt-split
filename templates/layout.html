@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <title>GPT Split</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://js.sentry-cdn.com/3f028c12bf974d988f2a41d3e8929ec8.min.js" crossorigin="anonymous"></script>
+    <script>
+      Sentry.init({
+        dsn: "https://3f028c12bf974d988f2a41d3e8929ec8@o4505190542540800.ingest.sentry.io/4505190543851520",
+        integrations: [new Sentry.BrowserTracing()],
+        tracesSampleRate: 1.0,
+      });
+    </script>
+  </head>
+  <body>{% block content %}{% endblock %}</body>
+</html>
