@@ -1,38 +1,43 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>GPT Split</h1>
-<form method="post">
-  <p>Split your input based on the number of tokens to input large amounts of text into ChatGPT.</p>
-  <label for="model"><b>Model:</b></label>
-  <select id="model" name="model">
-    {% for model in models %}
-      <option
-        value="{{ model }}"
-        {% if model == "gpt-4" %}selected{% endif %}>
-        {{model}}
-      </option>
-    {% endfor %}
-  </select>
-  <br>
-  <label for="tokenlimit"><b>Number of tokens to split on:</b></label>
-  <input type="number" id="tokenlimit" name="tokenlimit" value="8192">
-  <small>
-    OpenAI token limits:
-    GPT-4: <a href="#" onclick="setTokenLimit(8192)">8,192 tokens</a>.
-    GPT-3.5 Turbo: <a href="#" onclick="setTokenLimit(4096)">4,096 tokens</a>.
-  </small>
+  <h1>GPT Split</h1>
+  <form method="post">
+    <p>
+      Split your input based on the number of tokens to input large amounts of
+      text into ChatGPT.
+    </p>
+    <label for="model"><b>Model:</b></label>
+    <select id="model" name="model">
+      {% for model in models %}
+        <option
+          value="{{ model }}"
+          {% if model == "gpt-4" %}selected{% endif %}
+        >
+          {{ model }}
+        </option>
+      {% endfor %}
+    </select>
+    <br />
+    <label for="tokenlimit"><b>Number of tokens to split on:</b></label>
+    <input type="number" id="tokenlimit" name="tokenlimit" value="8192" />
+    <small>
+      OpenAI token limits: GPT-4:
+      <a href="#" onclick="setTokenLimit(8192)">8,192 tokens</a>. GPT-3.5 Turbo:
+      <a href="#" onclick="setTokenLimit(4096)">4,096 tokens</a>.
+    </small>
 
-  <label for="text"><b>Text to split:</b></label> <br>
-  <textarea id="text" name="text" rows="20" cols="50" required>{{ example_text }}</textarea><br>
+    <label for="text"><b>Text to split:</b></label> <br />
+    <textarea id="text" name="text" rows="20" cols="50" required>
+{{ example_text }}</textarea
+    ><br />
 
-  <input type="submit" value="Submit">
-</form>
+    <input type="submit" value="Submit" />
+  </form>
 
-
-<script>
-function setTokenLimit(limit){
-  var tokenlimt = document.getElementById("tokenlimit")
-  tokenlimt.value = limit;
-}
-</script>
+  <script>
+    function setTokenLimit(limit) {
+      var tokenlimt = document.getElementById("tokenlimit");
+      tokenlimt.value = limit;
+    }
+  </script>
 {% endblock %}

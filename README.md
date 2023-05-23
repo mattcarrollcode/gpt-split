@@ -11,7 +11,7 @@ Note: This has only been tested to work on macOS and [Railway](https://railway.a
 1. Clone this repo and `cd` to the root of the repo
 1. Install pyenv and pyenv-virtualenv: `brew install pyenv pyenv-virtualenv`
 1. Add the following to your `~/.bashrc` or `~/.zshrc` file:
-   ```
+   ```sh
    export PYENV_ROOT="$HOME/.pyenv"
    export PATH="$PYENV_ROOT/bin:$PATH"
    eval "$(pyenv init -)"
@@ -24,13 +24,14 @@ Note: This has only been tested to work on macOS and [Railway](https://railway.a
 
 ## Run
 
-* To run the app in dev mode, run: `python main.py`
-* To run the app in prod mode, run: `gunicorn main:app`
-* To run the unit tests, run: `python -m unittest`
+- To run the app in dev mode, run: `python main.py`
+- To run the app in prod mode, run: `gunicorn main:app`
+- To run the unit tests, run: `python -m unittest`
 
 ## Next steps
-* Fix Sentry message capture in `templates/results.html`
-* Input validation
-* Debug mobile copy-paste support
-* Support other tokenziers besides tiktoken
-* Prompt suggestions to help LLMs ingest multiple messages together
+
+- Fix Sentry message capture in `templates/results.html`
+- Input validation
+- Debug mobile copy-paste support
+- Support other tokenziers besides tiktoken
+- Prompt suggestions to help LLMs ingest multiple messages together
